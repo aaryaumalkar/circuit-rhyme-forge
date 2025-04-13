@@ -26,7 +26,11 @@ const PoemForm = ({ onGeneratePoem }: PoemFormProps) => {
 
   const generatePoem = () => {
     if (!topic.trim()) {
-      toast.warning("Please enter an engineering topic");
+      toast({
+        title: "Warning",
+        description: "Please enter an engineering topic",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -47,7 +51,11 @@ const PoemForm = ({ onGeneratePoem }: PoemFormProps) => {
 
       onGeneratePoem(poem);
       setIsGenerating(false);
-      toast.success("Your engineering poem has been created!");
+      toast({
+        title: "Success",
+        description: "Your engineering poem has been created!",
+        variant: "default",
+      });
     }, 1500);
   };
 

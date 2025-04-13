@@ -18,7 +18,11 @@ const PoemDisplay = ({ poem }: PoemDisplayProps) => {
   const copyPoem = () => {
     navigator.clipboard.writeText(poem);
     setCopied(true);
-    toast.success("Poem copied to clipboard!");
+    toast({
+      title: "Success",
+      description: "Poem copied to clipboard!",
+      variant: "default",
+    });
     
     setTimeout(() => {
       setCopied(false);
