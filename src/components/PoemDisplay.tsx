@@ -1,0 +1,54 @@
+
+import { useState } from "react";
+import { Copy, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/sonner";
+
+interface PoemDisplayProps {
+  poem: string | null;
+}
+
+const PoemDisplay = ({ poem }: PoemDisplayProps) => {
+  const [copied, setCopied] = useState(false);
+
+  if (!poem) {
+    return null;
+  }
+
+  const copyPoem = () => {
+    navigator.clipboard.writeText(poem);
+    setCopied(true);
+    toast.success("Poem copied to clipboard!");
+    
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
+
+  return (
+    <div className="notebook-paper animate-fade-in mt-8">
+      <div className="poem-container font-mono mb-6 text-lg">
+        {poem}
+      </div>
+      <Button
+        onClick={copyPoem}
+        variant="outline"
+        className="hover-lift"
+      >
+        {copied ? (
+          <>
+            <Check className="mr-2 h-4 w-4" />
+            Copied!
+          </>
+        ) : (
+          <>
+            <Copy className="mr-2 h-4 w-4" />
+            Copy Poem
+          </>
+        )}
+      </Button>
+    </div>
+  );
+};
+
+export default PoemDisplay;
